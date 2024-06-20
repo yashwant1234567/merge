@@ -1,0 +1,574 @@
+#include <iostream>
+using namespace std;
+#define max 10 
+class stack       //stack class this is first class 
+{
+  private:
+     int num[max];
+	 int top;
+	
+  public:
+	     int push(int v)        // for inserting value 
+		 {
+	    if(top==max-1)
+		{     
+
+		  cout<<"overflow"<<endl;
+		  return v;
+		  
+		  
+		}
+		  top =top+1;
+		  num[top]=v;
+		  return v;
+		}
+		stack()             // constructor
+		{
+			top=-1;
+		}
+		
+	   	 
+	   int pop()            //for deleting value
+	   {
+			int v;
+		if(top==-1)
+			{
+				cout<<"underflow";
+			
+			}
+			v=num[top];
+			top--;
+			return(v);
+		}
+	  void print()         //for printing all inserting and deleting value
+		{
+			int i;
+			if(top==-1)
+			{
+				cout<<" stack is empty"<<endl;
+				
+			}
+			for(i=top;i>=0;i--)
+			{
+				cout<<num[i]<<endl;
+				
+			}
+			
+		}
+	};
+		
+		//multi stack
+		
+
+
+class multistack                //multistack class second class of our program 
+{
+	private:
+		int num[max];
+		int topA,topB;        //topA=left to right , topB=right to left
+		int val;
+		int min;
+		int i,j;
+	public:
+	
+	void Lpush(int val) //left push  10,20,30,40(left to right)
+	{
+	
+		if(topA==max-1)
+		{
+			cout<<"\n stack is overflow"<<endl;
+		}
+		else if(topA+1==topB)
+		{
+			cout<<"\n stack is overflow"<<endl;
+		}
+		else
+			topA=topA+1;
+			
+		num[topA]=val;
+	}
+		
+		multistack()        //multistack algorithms
+		{
+			topA=-1;
+			topB=max+1;
+			min=0;
+		}
+	void Rpush(int val)         //right push 40,30,20,10 (right to left)
+	{
+		if(topB==min)
+		{
+			cout<<"\n stack is overflow"<<endl;
+		}
+		else if(topA==topB-1)
+		{
+		cout<<"\n stack is overflow"<<endl;
+		}
+		else
+			topB=topB-1;
+			
+		num[topB]=val;
+	}
+	
+	int Lpop()      //left deleting
+	{
+		if(topA==-1)
+		{
+			cout<<"\n stack is underflow"<<endl;
+		}
+		val=num[topA];
+		topA=topA-1;
+		return val;
+	}
+	int Rpop()
+	{
+		if(topB==max+1)
+		{
+			cout<<"\n stack is underflow"<<endl;
+		}
+		val=num[topB];
+		topB=topB-1;
+		return val;
+	}
+	void printA()
+	{
+	       
+		if(topA==-1)
+		{
+			cout<<"\n left stack is empty"<<endl;
+		}
+		for(int i=topA;i>=min;i--)
+		{
+			cout<<num[i]<<endl;
+			
+		}
+		
+		
+	}
+			
+	void printB()
+	{
+	        
+		if(topB==max+1)
+		{
+			cout<<"\n right stack is empty"<<endl;
+		}
+		for(int j=max;j>=topB;j--)
+		{
+			cout<<num[j]<<endl;
+			
+		}
+	
+	}
+};
+				
+				
+		// queue
+		
+
+class queue         //class queue third class of out program
+{
+  private:
+     int num[max];
+	 int f,r;       //front and rare
+	 int val;
+  public:
+	     void insert(int val)       //inserting in queue
+		 {
+	    if(r==max-1)
+		{     
+
+		  cout<<" queue is overflow";
+		  
+		  
+		}
+		if(f==-1 && r==-1)
+		{
+		f=0;
+		r=0;
+		}
+		else
+			r=r+1;
+		  
+		num[r]=val;
+		}
+		queue()     //constructor 
+		{
+			r=-1;
+			f=-1;
+		}
+		
+	   	 
+	   int del()        //value deleting from queue
+	   {
+			int val=0;
+		if(f==-1 && r==-1)
+			{
+				cout<<" queue is underflow";
+			
+			}
+			val=num[f];
+			if(f==r)
+			{
+				f=-1;
+				r=-1;
+			}
+			else
+				f=f+1;
+				
+				return (val);
+		}
+		int print()     //value printing for queue
+		{
+			int i,cnt=0;
+			if(f==-1 && r==-1)
+			{
+				cout<<" queue is empty";
+				return(cnt);
+			}
+			for(i=f;i<=r;i++)
+			{
+				cout<<num[i];
+				cnt++;
+			}
+			return(cnt);
+		}
+	};
+		
+		
+		//circular queue
+		
+class circular      //class circular fourth class of our proram
+{
+	private:
+		int num[max];
+		int f,r;
+		int i;
+	public:
+		void insert(int v)
+		{
+			if((f==0 && r==max-1)|| (r+1==f))
+			{
+				cout<<"circular queue is overflow"<<endl;
+			}
+			if(f==-1 && r==-1)
+			{
+				f=0;
+				r=0;
+			}
+			else
+				r=(r+1) % max;
+			num[r]=v;
+		}
+		circular()      //constructor
+		{
+		f=-1;
+		r=-1;
+		}
+		int del()
+		{
+		    int v=0;
+			if(f==-1 && r==-1)
+			{
+				cout<<"circular queue is empty"<<endl;
+			}
+			v=num[f];
+			f=(f+1)%max;
+			return v;
+		}
+		int print()
+		{
+		 i=f;
+		 while (i!=r+1)
+		 {
+			cout<<num[i]<<endl;
+			i=(i+1)%max;
+		 }
+			return num[i];
+		}
+	
+	};
+
+
+// main function started
+
+int main()
+	{
+		int ch,val,n;
+		char c;
+		stack s1;       // class stack and s1 is object of stack class 
+		multistack s2;  //class multistack and s2 is object of multistack class 
+		queue s3;       // class queue and s3 is object of queue class 
+		circular s4;        //class circular and s4 is object of circular class
+		do
+		{
+		cout<<"\n choce 1.stack()"<<endl;
+		cout<<"\n choce 2.queue()"<<endl;
+		cout<<"\n 3.quite()"<<endl;
+		cout<<"\n enter a choice"<<endl;
+		cin>> ch;
+	
+		switch(ch)
+		{
+		case 1:
+		{
+						do
+						{		
+							cout<<"\n a.normal stack()"<<endl;
+							cout<<"\n b.multistack stack()"<<endl;
+							cout<<"\n choice c.exit()"<<endl;
+							cout<<"enter your choice again in a,b,c"<<endl;
+							cin>>c;
+                    
+							if(c=='a')
+								{	
+										do
+											{
+									
+												cout<<"\n 1.push()"<<endl;
+												cout<<"\n 2.pop()"<<endl;
+												cout<<"\n 3.print()"<<endl;
+												cout<<"\n 4.exit()"<<endl;
+												cout<<"\n enter a number() 1,2,3,4"<<endl;
+												cin>>n;
+								
+												if(n==1)
+													{
+								
+														cout<<"\n enter a value"<<endl;
+														cin>>val;
+														s1.push(val);
+													}
+						
+													if(n==2)
+													{	
+														val=s1.pop();
+														cout<<val<<endl;
+													}		
+							
+													if(n==3)
+													{
+													s1.print();
+												
+													}
+													if(n==4)
+													{
+														break;
+													}
+												}
+													while(ch<5);
+							
+											}
+						
+						
+							if(c=='b')
+								{	
+									do
+									{
+										cout<<"this is for multistack"<<endl;	
+										cout<<"\n 1.Lmultistack()"<<endl;
+										cout<<"\n 2.Rmultistack()"<<endl;
+										cout<<"\n 3.exit()"<<endl;
+										cout<<"\n enter a number() 1,2,3,"<<endl;
+										cin>>n;
+								
+										if(n==1)
+											{
+												do
+													{		
+														cout<<"\n 1.Lpush()"<<endl;
+														cout<<"\n 2.Lpop()"<<endl;
+														cout<<"\n 3.Lprint()"<<endl;
+														cout<<"\n cho 4.Lexit()"<<endl;
+														cout<<"enter your choice again in 1,2,3,4"<<endl;
+														cin>>n;
+								
+											if(n==1)
+								
+												{
+													cout<<"\n enter a value for Lpush()"<<endl;
+													cin>>val;
+													s2.Lpush(val);
+												}
+						
+											if(n==2)
+												{	
+													s2.Lpop();
+													
+												}		
+							
+												if(n==3)
+												{
+													s2.printA();
+												
+												}
+												if(n==4)
+												{
+													break;
+												}
+											}
+											while(ch<5);
+							
+											}
+							
+								if(n==2)
+									{
+										do
+											{		
+												cout<<"\n 1.Rpush()"<<endl;
+												cout<<"\n 2.Rpop()"<<endl;
+												cout<<"\n 3.Rprint()"<<endl;
+												cout<<"\n cho 4.Rexit()"<<endl;
+												cout<<"enter your choice again in 1,2,3,4"<<endl;
+												cin>>n;
+												if(n==1)
+													
+														
+															{
+								
+																cout<<"\n enter a value for Rpush()"<<endl;
+																cin>>val;
+																s2.Rpush(val);
+															}
+						
+												if(n==2)
+													{	
+														val=s2.Rpop();
+														cout<<val<<endl;
+													}		
+							
+												if(n==3)
+													{
+													s2.printB();
+												
+													}
+												if(n==4)
+													{
+													break;
+													}
+												}
+												while(ch<5);
+								
+											}
+							
+										if(n==3)
+												{
+												cout<<"\n exit multistack"<<endl;
+													break;
+												}
+											}
+											while(n<4);
+									}
+						if(c=='c')
+						{
+							cout<<"exit stack"<<endl;
+								break;
+						}
+					}
+					while(c<3);
+					break;				
+				}
+		
+		
+	
+		
+	case 2:
+	
+		{
+				do
+				{
+					cout<<"QUEUE"<<endl;
+					cout<<"a.normal queue()"<<endl;
+					cout<<"b.circular queue ()"<<endl;
+					cout<<"c.exitqueue()"<<endl;
+					cout<<"enter a chracter"<<endl;
+					cin>>c;
+					
+					if(c=='a')
+					{		
+								do
+								{
+								
+							cout<<"1.insert()"<<endl;
+							cout<<"2.delete()"<<endl;
+							cout<<"3.print()"<<endl;
+							cout<<"4.exit()"<<endl;
+							cout<<"enter a number"<<endl;
+							cin>>n;
+							
+							if(n==1)
+							{
+						
+								cout<<"enter a value";
+								cin>>val;
+								s3.insert(val);
+							}
+							if(n==2)
+							{
+								val=s3.del();
+								cout<<"deleted value \n"<<val;
+							}
+							if(n==3)
+							{
+								val=s3.print();
+								cout<<"\n total element in queue"<<val;
+							}
+							if(n==4)
+							{
+								break;
+							}
+						}
+						while(n<5);
+					}
+					
+					if(c=='b')
+					{
+						do
+						{
+							cout<<"1.insert()"<<endl;
+							cout<<"2.delete()"<<endl;
+							cout<<"3.print()"<<endl;
+							cout<<"4.exit()"<<endl;
+							cout<<"enter a number"<<endl;
+							cin>>n;
+							
+							if(n==1)
+							{
+								cout<<"enter a value for inserting in circular queue"<<endl;
+								cin>>val;
+								s4.insert(val);
+							}
+							
+							if(n==2)
+							{
+								val=s4.del();
+								cout<<"deleted value ="<<val;
+							}
+							if(n==3)
+							{
+								val=s4.print();
+								cout<<"print circular queue"<<val;
+							}
+							if(n==4)
+							{
+								break;
+							}
+							}
+							while(n<5);
+						}
+					if(c=='c')
+					{
+						break;
+					}
+				}
+				while(c<'d');
+			break;
+		}
+		
+	}
+
+		}    
+	while(ch<3);
+
+return 0;
+}
